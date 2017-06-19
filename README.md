@@ -3,6 +3,28 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Writeup
+
+* Student describes the effect of the P, I, D component of the PID algorithm in their implementation. Is it what you expected?
+
+  PID stands for proportional–integral–derivative.  Its a control mechanism which constantly corrects based on the error value until a desired setpoint is reached.
+
+  The P component - proportional - is taken as an inversely proportional to measure how much turn the wheel should make. This means, more the error more turn the wheel should take
+  The I component - Integral - Accounts for the past error values. Its a sum of past erros over time and correction is proportional to that. This means if there is any small error values over long time, we can correct that error
+  The D component - derivative - this projects the future error and corrects the wheel. This means it calculates if we will overshoot the target if coninued in the same path and correct based on that
+
+  Yes, in my implementation I see that P, I, D did have a lot of impact. When I switched off the P, it was catestrophic failure for car as it was never able to be in lane. Its the most important.
+  D component is second most important, expecially for long constant turns
+  I component is very imporant in correcting small errors which can become big soon. This happens when car comes out of a curve into a straight road. The error overtime helps the car adjust fast
+
+
+* Student discusses how they chose the final hyperparameters (P, I, D coefficients). This could be have been done through manual tuning, twiddle, SGD, or something else, or a combination!
+  
+  Initially for PID values (0.3, 0.0005, 20.) was choosen. Twiddle algorithm was used to tune. the twiddle threshold. Also different twiddle threasholds were experiemented upon. Also there is a throttle component which scales speed of the vehicle. Different speeds had different best parameters for twiddle.
+  Running the simulation many times, the parameter of (0.114, 0, 3.24) was choosen for PID for a throttle of 0.5x scale. This is best suited for this track for the speed choosen.
+
+---
+
 ## Dependencies
 
 * cmake >= 3.5
